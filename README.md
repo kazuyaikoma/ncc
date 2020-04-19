@@ -1,2 +1,2 @@
-# C-Compiler
-C-Compiler repository
+# C Compiler
+NixieSquid's C Compiler repository
