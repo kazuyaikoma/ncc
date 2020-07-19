@@ -11,7 +11,6 @@ typedef enum {
   TK_EOF,       // 入力終了
 } TokenKind;
 
-// TODO: あとで上のenumと同じような感じで書き換えてみる
 typedef struct Token Token;
 
 struct Token {
