@@ -14,10 +14,10 @@ typedef enum {
 typedef struct Token Token;
 
 struct Token {
-  TokenKind kind; // トークンの型
-  Token *next;    // 次の入力トークン
-  int val;        // kindがTK_NUMの場合、その数値
-  char *str;      // トークン文字列
+  TokenKind kind;  // トークンの型
+  Token *next;     // 次の入力トークン
+  int val;         // kindがTK_NUMの場合、その数値
+  char *str;       // トークン文字列
 };
 
 // 現在見ているトークン
@@ -32,7 +32,7 @@ void error_at(char *loc, char *fmt, ...) {
 
   int pos = loc - user_input;
   fprintf(stderr, "%s\n", user_input);
-  fprintf(stderr, "%*s", pos, ""); // pos個の空白を出力
+  fprintf(stderr, "%*s", pos, "");  // pos個の空白を出力
   fprintf(stderr, "^ ");
   vfprintf(stderr, fmt, ap);
   fprintf(stderr, "\n");
@@ -46,8 +46,7 @@ void error_at(char *loc, char *fmt, ...) {
  *    falseを返す
  */
 bool consume(char op) {
-  if (token->kind != TK_RESERVED || token->str[0] != op)
-    return false;
+  if (token->kind != TK_RESERVED || token->str[0] != op) return false;
   token = token->next;
   return true;
 }
@@ -71,16 +70,13 @@ void expect(char op) {
  *    エラーを起こす
  */
 int expect_number() {
-  if (token->kind != TK_NUM)
-    error_at(token->str, "Token is not a number.");
+  if (token->kind != TK_NUM) error_at(token->str, "Token is not a number.");
   int val = token->val;
   token = token->next;
   return val;
 }
 
-bool at_eof() {
-  return token->kind == TK_EOF;
-}
+bool at_eof() { return token->kind == TK_EOF; }
 
 /**
  *  新しいトークンを作りcurに繋げる
