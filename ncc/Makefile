@@ -5,7 +5,7 @@ OBJS=$(SRCS: .c=.o)
 ncc: $(OBJS)
 	$(CC) -o ncc $(OBJS) $(LDFLAGS)
 
-$(OBJS): 9cc.h
+$(OBJS): ncc.h
 
 test: ncc
 	bash ./test.sh
