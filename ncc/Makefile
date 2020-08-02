@@ -2,10 +2,10 @@ CFLAGS=-std=c11 -g -static
 SRCS=$(wildcard *.c)
 OBJS=$(SRCS: .c=.o)
 
+$(OBJS): ncc.h
+
 ncc: $(OBJS)
 	$(CC) -o ncc $(OBJS) $(LDFLAGS)
-
-$(OBJS): ncc.h
 
 test: ncc
 	bash ./test.sh
