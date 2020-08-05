@@ -6,6 +6,7 @@ void gen(Node *node) {
     return;
   }
 
+  // DFS(pre-order)
   gen(node->lhs);
   gen(node->rhs);
 
