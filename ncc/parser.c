@@ -22,16 +22,27 @@ Node *new_num(int val) {
   return node;
 }
 
-Node *expr();
-Node *equality();
-Node *relational();
-Node *add();
-Node *mul();
-Node *unary();
-Node *primary();
+void program() {
+  int i=0;
+  while (!at_eof()) code[i++] = stmt();
+  code[i] = NULL;
+}
+
+Node *stmt() {
+  Node *node = expr();
+  expect(';');
+  return node;
+}
 
 Node *expr() {
-  return equality();
+  return assign();
+}
+
+Node *assign() {
+  Node *node = equality();
+  if (consume("="))
+    node = new_binary(ND_LVAR, node, assign());
+  return node;
 }
 
 Node *equality() {
@@ -104,6 +115,12 @@ Node *primary() {
     Node *node = expr();
     expect(')');
     return node;
+  }
+
+  if (consume_ident()) {
+    Node *node = calloc(1, sizeof(Node));
+    node->kind = ND_LVAR;
+    node->offset = (token->str[0] - 'a'+1) * 8;
   }
 
   return new_num(expect_number());

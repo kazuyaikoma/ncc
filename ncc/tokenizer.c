@@ -26,6 +26,13 @@ bool consume(char *op) {
   return true;
 }
 
+bool consume_ident() {
+  if (token->kind != TK_IDENT)
+       return false;
+  token = token->next;
+  return true;
+}
+
 void expect(char op) {
   if (token->kind != TK_RESERVED || token->str[0] != op)
     error_at(token->str, "Token is not '%c'.", op);
