@@ -10,6 +10,7 @@
  */
 typedef enum {
   TK_RESERVED,  // reserved Token
+  TK_IDENT,     // variables identifier
   TK_NUM,       // Integer
   TK_EOF,       // EOF
 } TokenKind;
